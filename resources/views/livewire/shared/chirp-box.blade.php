@@ -27,7 +27,7 @@
                         <x-dropdown-link wire:click="edit({{ $chirp->id }})">
                             {{ __('Edit') }}
                         </x-dropdown-link>
-                        <x-dropdown-link wire:click="delete({{ $chirp->id }})" wire:confirm="Are you sure to delete this chirp?"> 
+                        <x-dropdown-link wire:click="delete({{ $chirp->id }})" wire:confirm="Are you sure to delete this Meow?"> 
                             {{ __('Delete') }}
                         </x-dropdown-link> 
                     </x-slot>
@@ -38,6 +38,11 @@
             <livewire:chirps.edit :chirp="$chirp" :key="$chirp->id" />
         @else
             <p class="mt-4 text-lg text-gray-900">{{ $chirp->message }}</p>
+            @if ($chirp->getPostImageURL())
+                <div class="post-image mb-2 d-flex align-items-center justify-content-center">
+                    <img src="{{ $chirp->getPostImageURL() }}" alt="Post Image">
+                </div>
+            @endif
         @endif
         <div>
             @include('livewire.shared.like-button')

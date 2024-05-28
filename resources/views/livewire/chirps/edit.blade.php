@@ -22,7 +22,7 @@ $cancel = fn () => $this->dispatch('chirp-edit-canceled');
 
 ?>
 
-<div>
+<div class="mt-3 mb-3">
     <form wire:submit="update"> 
         <textarea
             wire:model="message"

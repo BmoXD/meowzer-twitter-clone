@@ -12,6 +12,7 @@ class Chirp extends Model
 
     protected $fillable = [
         'message',
+        'post_image',
     ];
 
     public function user(): BelongsTo
@@ -27,5 +28,14 @@ class Chirp extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class,'chirp_id');
+    }
+
+    public function getPostImageURL()
+    {
+        if($this->post_image)
+        {
+           return url('storage/'.$this->post_image);
+        }
+        return null;
     }
 }

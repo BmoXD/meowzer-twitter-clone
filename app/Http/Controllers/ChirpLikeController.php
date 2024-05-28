@@ -13,7 +13,7 @@ class ChirpLikeController extends Controller
 
         $liker ->likes()->attach($chirp);
 
-        return redirect()->route("chirps")->with("success","Liked Successfully");
+        return redirect()->route("chirps")->with("success","Liked Meow Successfully");
     }
 
     public function unlike (Chirp $chirp)
@@ -22,7 +22,7 @@ class ChirpLikeController extends Controller
 
         $liker ->likes()->detach($chirp);
 
-        return redirect()->route("chirps")->with("success","Liked Successfully");
+        return redirect()->route("chirps")->with("error","Unliked Meow Successfully");
     }
     
 }

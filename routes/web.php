@@ -43,6 +43,9 @@ Route::post('users/{user}/unfollow', [UserController::class, 'unfollow'])
 Route::get('profile', [UserController::class, 'profile'])
     ->middleware('auth')->name('profile');
 
+Route::get('chirps', [ChirpController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('chirps');
 
 
 require __DIR__.'/auth.php';

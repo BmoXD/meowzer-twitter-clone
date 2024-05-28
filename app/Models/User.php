@@ -19,6 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'bio',
+        'image',
         'email',
         'password',
     ];
@@ -47,9 +49,23 @@ class User extends Authenticatable
         ];
     }
 
+    public function getProfilePicURL()
+    {
+        if($this->image)
+        {
+           return url('storage/'.$this->image);
+        }
+        return 'https://i.pinimg.com/474x/b9/68/3d/b9683d3fe3f25bca278364f64f215c2a.jpg';
+    }
+
     public function chirps(): HasMany
     {
-        return $this->hasMany(Chirp::class);
+        return $this->hasMany(Chirp::class)->orderBy("created_at","DESC");
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class)->orderBy("created_at","DESC");
     }
 
     public function likes()
@@ -61,4 +77,15 @@ class User extends Authenticatable
     {
         return $this->likes()->where('chirp_id', $chirp->id)->exists();
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class,'follower_user', 'user_id', 'follower_id')->withTimestamps();
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class,'follower_user', 'follower_id', 'user_id')->withTimestamps();
+    }
+
 }

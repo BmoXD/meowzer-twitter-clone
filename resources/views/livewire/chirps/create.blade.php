@@ -22,6 +22,7 @@ $store = function () {
 ?>
  
 <div>
+    @include('livewire.shared.success-flash')
     <form wire:submit="store"> 
         <textarea
             wire:model="message"

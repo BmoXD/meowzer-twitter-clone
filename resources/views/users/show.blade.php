@@ -57,16 +57,27 @@
                                 <a href="#" class="fw-light nav-link fs-6 me-3"> <span class="bi bi-sticky-fill me-1">
                                     </span> {{ $user->chirps()->count() }} </a>
                                 <a href="#" class="fw-light nav-link fs-6"> <span class="bi bi-chat-fill me-1">
-                                    </span>  </a>
+                                    </span> {{ $user->comments()->count() }} </a>
                             </div>
-                            @if (Auth::id() !== $user->id)
-                            <div class="mt-3">
-                                <button class="btn btn-primary btn-sm"> Follow </button>
-                            </div>
-                            @endif
+                            
                         </div>
                     </div>
                 </form>
+                @if (Auth::id() !== $user->id)
+                    <div class="mt-3">
+                        @if (Auth::user()->isFollowing($user))
+                            <form method="POST" action=" {{ route('users.unfollow', $user->id) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary btn-sm"> Unfollow </button>
+                            </form>
+                        @else
+                            <form method="POST" action=" {{ route('users.follow', $user->id) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary btn-sm"> Follow </button>
+                            </form>
+                        @endif
+                    </div>
+                @endif
             </div>
 
             <div class="p-4 sm:p-8  dark:bg-gray-800 shadow sm:rounded-lg">

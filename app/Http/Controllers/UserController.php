@@ -62,13 +62,21 @@ class UserController extends Controller
         return $this->show(auth()->user());
     }
 
-    public function follow()
+    public function follow(User $user)
     {
+        $follower = auth()->user();
 
+        $follower->followings()->attach($user);
+
+        return redirect()->route('users.show', $user->id)->with('success','Followed User Successfuly');
     }
 
-    public function unfollow()
+    public function unfollow(User $user)
     {
+        $follower = auth()->user();
 
+        $follower->followings()->detach($user);
+
+        return redirect()->route('users.show', $user->id)->with('success','Unfollowed User Successfuly');
     }
 }

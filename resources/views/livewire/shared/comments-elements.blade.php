@@ -1,7 +1,7 @@
 <div class="mt-5">
     <!-- Display existing comments -->
     @foreach($chirp->comments as $comment)
-    <div class="mb-5 comment-box p-3">
+    <div class="mb-3 comment-box p-3">
         <div class="d-flex align-items-start">
             {{-- <strong>{{ $comment->user->name }}</strong> <!-- Assuming a 'user' relationship --> --}}
             <div class="d-flex align-items-center">

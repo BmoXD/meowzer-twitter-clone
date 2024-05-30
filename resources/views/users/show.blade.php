@@ -86,7 +86,11 @@
                 <div class="max-w-2xl mt-3" id="meows">
                     <h2 class="text-center dark:text-white">{{ $user->name }}'s Meows</h2>
                     <hr>
-                    <livewire:chirps.list :user="$user" />
+                    @if ($user->chirps())
+                        <livewire:chirps.list :user="$user" />
+                    @else
+                        <h5 class="text-center dark:text-white">User has no posts ;3;</h5>
+                    @endif
                 </div>
             </div>
         </div>

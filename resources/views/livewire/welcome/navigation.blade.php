@@ -26,7 +26,7 @@
 </nav> --}}
 <div>
     @auth
-    <a href="{{ url('/chirps') }}" class="btn btn-primary active" role="button" aria-pressed="true">Open Pandora's Box</a>
+    <a href="{{ route('chirps') }}" class="btn btn-primary active" role="button" aria-pressed="true">Open Pandora's Box</a>
     
     @else
     <a href="{{ route('login') }}" class="btn btn-primary active" role="button" aria-pressed="true">Login</a>

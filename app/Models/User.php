@@ -55,7 +55,7 @@ class User extends Authenticatable
         {
            return url('storage/'.$this->image);
         }
-        return 'https://i.pinimg.com/474x/b9/68/3d/b9683d3fe3f25bca278364f64f215c2a.jpg';
+        return asset('DefaultAvatar.jpg');
     }
 
     public function chirps(): HasMany

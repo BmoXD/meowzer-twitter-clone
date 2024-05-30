@@ -5,4 +5,5 @@
             <h2 class="">{{ $following->name }}</h2>
         </div>
     </a>
+    <div class="user-card-paw"></div>
 </div>

@@ -17,11 +17,13 @@
     z-index: 1;
 }
 
-.chirp-box-paws {
+.chirp-box-paws
+{
     position: relative; 
 }
 
-.chirp-box-paws::before {
+.chirp-box-paws::before
+{
     content: ""; 
     position: absolute;
     bottom: -20px;
@@ -111,6 +113,29 @@ hr
 body
 {
     background: linear-gradient(to top, #291664, #bc3fff);
+}
+
+.user-card-paw
+{
+    position: relative;
+}
+
+.user-card-paw::before {
+    content: ""; 
+    position: absolute;
+    bottom: -40px;
+    right: -20px; 
+    width: 280px;
+    height: 350px;
+    background-image: url('/backgroundPaw-small-tilted.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 0;
+    transform-origin: bottom right; 
+    transform: scale(0.4);
+    pointer-events: none;
+    /* background-position: center; */
 }
 
 

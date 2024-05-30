@@ -37,7 +37,7 @@ class UserController extends Controller
         $validated = request()->validate(
             [
                 'name'=> ['required', 'string', 'max:30', 'min:3'],
-                'bio' => ['nullable', 'string', 'max:255', 'min:1'],
+                'bio' => ['nullable', 'string', 'max:4096', 'min:1'],
                 'image' => 'image'
             ]
         );

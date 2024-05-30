@@ -15,9 +15,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         //For showing posts in the profile menu
-        //$chirps = $user->chirps();
+        $chirps = $user->chirps()->paginate(5);
 
-        return view("users.show", compact("user"));
+        return view("users.show", compact("user", 'chirps'));
     }
     
     /**
@@ -78,5 +78,21 @@ class UserController extends Controller
         $follower->followings()->detach($user);
 
         return redirect()->route('users.show', $user->id)->with('success','Unfollowed User Successfuly');
+    }
+
+    public function followings(User $user)
+    {
+        $followings = $user->followings()->paginate(10);
+        
+        return view('users.followings', compact('user', 'followings'));
+    }
+
+    public function followers(User $user)
+    {
+        // Retrieve the list of users that the specified user is following
+        $followers = $user->followers()->paginate(10);
+        
+        // Return the view with the user and the list of followings
+        return view('users.followers', compact('user', 'followers'));
     }
 }

@@ -30,7 +30,9 @@ $cancel = fn () => $this->dispatch('chirp-edit-canceled');
         ></textarea>
  
         <x-input-error :messages="$errors->get('message')" class="mt-2" />
-        <x-primary-button class="mt-4">{{ __('Save') }}</x-primary-button>
-        <button class="mt-4" wire:click.prevent="cancel">Cancel</button>
+        <div class="d-flex align-items-center">
+            <button type="submit" class="btn btn-primary mt-4 me-2">{{ __('Save') }}</button>
+            <button class="mt-4" wire:click.prevent="cancel">Cancel</button>
+        </div>
     </form> 
 </div>

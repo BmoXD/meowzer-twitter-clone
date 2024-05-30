@@ -38,4 +38,9 @@ class Chirp extends Model
         }
         return null;
     }
+
+    public static function getTotalCount()
+    {
+        return self::count();
+    }
 }

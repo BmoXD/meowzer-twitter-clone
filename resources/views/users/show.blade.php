@@ -7,7 +7,7 @@
                     @method('put')
                     <div class="">
                         <div class="d-flex align-items-center">
-                            <img style="width:150px; height:150px; object-fit:cover; border-radius: 50%" src="{{ $user->getProfilePicURL() }}" class="me-2" alt="Mario Avatar">
+                            <img style="width:150px; height:150px; object-fit:cover; border-radius: 50%" src="{{ $user->getProfilePicURL() }}" class="me-2" alt="User Avatar">
                             <div>
                                 @if ($isEditing ?? false)
                                     <input name="name" type="text" class="form-control" value="{{ $user->name }}">
@@ -15,12 +15,12 @@
                                         <span class="text-danger fs-6"> {{ $message }} </span>
                                     @enderror
                                 @else
-                                    <h3 class="card-title mb-0"><a href="#"> {{ $user->name }}
+                                    <h3 class="card-title mb-0"><a href="{{ route('users.show', $user->id) }}"> {{ $user->name }}
                                     </a></h3>
                                     <span class="fs-6 dark:text-white">{{ $user->email }}</span>
                                 @endif
                             </div>
-                            <div class="d-flex justify-content-end">
+                            <div class="ms-auto p-2">
                                 @if (Auth::id() === $user->id)
                                     @if ($isEditing ?? false)
                                         <a href="{{ route('users.show',$user->id) }}">View</a>
@@ -40,7 +40,7 @@
                             <h5 class="fs-5 dark:text-white"> Bio : </h5>
                             @if ($isEditing ?? false)
                                 <div>
-                                    <textarea name="bio" class="form-control" id="bio" cols="30" rows="3"></textarea>
+                                    <textarea name="bio" class="form-control" id="bio" cols="30" rows="3">{{ $user->bio }}</textarea>
                                 </div>
                                 <button class="btn btn-primary btn-sm my-3"> Save </button>
                                 @error('name')
@@ -52,12 +52,14 @@
                                 </p>
                             @endif
                             <div class="d-flex justify-content-start dark:text-white">
-                                <a href="#" class="fw-light nav-link fs-6 me-3"> <span class="bi bi-person-fill me-1">
-                                    </span> 120 Followers </a>
-                                <a href="#" class="fw-light nav-link fs-6 me-3"> <span class="bi bi-sticky-fill me-1">
+                                <a href="{{ route('users.followers',$user->id) }}" class="fw-light nav-link fs-6 me-3"> <span class="bi bi-person-fill me-1">
+                                    </span> {{ $user->followers()->count()}} </a>
+                                <a href="{{ route('users.followings',$user->id) }}" class="fw-light nav-link fs-6 me-3"> <span class="bi bi-person-plus-fill me-1">
+                                    </span> {{ $user->followings()->count()}} </a>
+                                <a href="#meows" class="fw-light nav-link fs-6 me-3"> <span class="bi bi-sticky-fill me-1">
                                     </span> {{ $user->chirps()->count() }} </a>
-                                <a href="#" class="fw-light nav-link fs-6"> <span class="bi bi-chat-fill me-1">
-                                    </span> {{ $user->comments()->count() }} </a>
+                                <label class="fw-light nav-link fs-6"> <span class="bi bi-chat-fill me-1">
+                                    </span> {{ $user->comments()->count() }} </label>
                             </div>
                             
                         </div>
@@ -80,8 +82,11 @@
                 @endif
             </div>
 
-            <div class="p-4 sm:p-8  dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
+            <div class="mx-20 d-flex justify-content-center dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-2xl mt-3" id="meows">
+                    <h2 class="text-center dark:text-white">{{ $user->name }}'s Meows</h2>
+                    <hr>
+                    <livewire:chirps.list :user="$user" />
                 </div>
             </div>
         </div>

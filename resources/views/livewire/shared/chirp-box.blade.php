@@ -1,10 +1,10 @@
 <div class="p-6 flex space-x-2 chirp-box mb-5" wire:key="{{ $chirp->id }}">
-    <div class="flex-1">
+    <div class="flex-1 chirp-box-paw-zindex-fix">
         <div class="flex justify-between items-center chirp-metadata p-2">
             <div>
                 <div class="d-flex align-items-center">
                     <img class="me-2" src="{{ $chirp->user->getProfilePicURL() }}" style="object-fit: cover; width: 60px; height: 60px; border-radius:50%;" alt="User Avatar">
-                    <span class="text-gray-800"><a href="{{ route('users.show', $chirp->user->id) }}">{{ $chirp->user->name }}</a></span>
+                    <span class="text-gray-800"><a class="clickable-user    " href="{{ route('users.show', $chirp->user->id) }}">{{ $chirp->user->name }}</a></span>
 
                     <div class="text-gray-600 ms-3">
                         <span class="bi bi-clock-fill"></span>
@@ -34,6 +34,7 @@
                 </x-dropdown>
             @endif
         </div>
+        
         @if ($chirp->is($editing)) 
             <livewire:chirps.edit :chirp="$chirp" :key="$chirp->id" />
         @else
@@ -51,4 +52,5 @@
             @include('livewire.shared.comments-elements')
         </div>
     </div>
+    <div class="chirp-box-paws"></div>
 </div>

@@ -4,7 +4,7 @@
     
     <form action="{{ route('chirps.unlike', $chirp->id) }}" method="POST">
         @csrf
-        <button type="submit" href="#" class="fw-light nav-link fs-6">
+        <button type="submit" href="#" class="fw-light nav-link fs-4">
             <span class="bi bi-heart-fill me-1"></span>
             {{ $chirp->likes()->count() }}
         </button>
@@ -12,7 +12,7 @@
     @else
     <form action="{{ route('chirps.like', $chirp->id) }}" method="POST">
         @csrf
-        <button type="submit" href="#" class="fw-light nav-link fs-6">
+        <button type="submit" href="#" class="fw-light nav-link fs-4">
             <span class="bi bi-heart me-1"></span>
             {{ $chirp->likes()->count() }}
         </button>

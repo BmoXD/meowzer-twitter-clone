@@ -32,7 +32,7 @@ $store = function ()
 
 ?>
 
-<div>
+<div class="chirp-create-box p-3">
     @include('livewire.shared.success-flash')
     <form wire:submit="store" id="chirp-form">
         <textarea
@@ -47,14 +47,19 @@ $store = function ()
             <input type="file" wire:model="post_image" id="post_image" class="form-control">
         </div>
 
+        <!-- Image preview -->
+        @if ($post_image)
+            <img class="chirp-create-box-imagePreview mt-3" src="{{ $post_image->temporaryUrl() }}" alt="Image Preview">
+        @endif
+
         <x-input-error :messages="$errors->get('message')" class="mt-2" />
-        <x-primary-button class="mt-4">{{ __('Chirp') }}</x-primary-button>
+            <button type="submit" class="btn btn-primary mt-4"><span class="fa fa-paw"></span> {{ __('Meow!') }}</button>
     </form> 
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const textarea = document.getElementById('message-textarea');
+    const textarea = document.getElementById('chirp-form');
     const fileInput = document.getElementById('post_image');
 
     textarea.addEventListener('dragover', (e) => {
